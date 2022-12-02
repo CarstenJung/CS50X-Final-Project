@@ -1,22 +1,68 @@
-body {
-    background: rgb(0,212,208);
-    background: radial-gradient(circle, rgba(0,212,208,0.5116640406162465) 0%, rgba(235,108,8,0.5312718837535014) 48%);
-    width: 100vw;
-    height: 100vh;
+:root {
+    --gradient: radial-gradient(circle, rgba(0,212,208,0.5116640406162465) 0%, rgba(235,108,8,0.5312718837535014) 48%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 100%;
+    }
 }
 
 /* Index */
 .wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    font-family: 'Anybody', cursive;
+    background: rgb(0,212,208);
+    background: var(--gradient);
+    background-size: 400%;
+    animation: gradient 20s ease infinite alternate;
+    width: 100vw;
+    height: 100vh;
 }
 
-.wrapper h1 {
-    font-size: 5rem;
+.hero {
+    text-align: center;
+    padding-top: 10%;
 }
 
-.wrapper input {
-   
+.hero h1 {
+    font-size: 10rem;
+    font-weight: 900;
+    color: #222;
+}
+
+
+.hero button {
+    width: 20%;
+    height: 3rem;
+    border: 2px solid #000;
+    background-color: transparent;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    cursor: pointer;
+}
+
+/* Remove link decoration */
+.gsap_hero a {
+    text-decoration: none;
+}
+
+/* Media Query */
+@media screen and (max-width: 768px) {
+    .hero h1 {
+        font-size: 7rem;
+        margin: 15% 0 5% 0;
+    }
+    .hero button {
+        width: 50%;
+    }
 }
