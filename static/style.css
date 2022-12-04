@@ -1,5 +1,7 @@
 :root {
     --gradient: radial-gradient(circle, rgba(0,212,208,0.5116640406162465) 0%, rgba(235,108,8,0.5312718837535014) 48%);
+    --font-headline: 'Anybody', cursive;
+    --font-text: 'Roboto', sans-serif;
 }
 
 * {
@@ -19,7 +21,7 @@
 
 /* Index */
 .wrapper {
-    font-family: 'Anybody', cursive;
+    font-family: var(--font-headline);
     background: rgb(0,212,208);
     background: var(--gradient);
     background-size: 400%;
@@ -28,18 +30,24 @@
     height: 100vh;
 }
 
+/* Center and place the content */
 .hero {
     text-align: center;
     padding-top: 10%;
 }
 
+/* Sytle hero */
 .hero h1 {
     font-size: 10rem;
     font-weight: 900;
     color: #222;
 }
 
+.hero h2 {
+    margin-top: -20px;
+}
 
+/* Style buttons */
 .hero button {
     width: 20%;
     height: 3rem;
@@ -47,13 +55,95 @@
     background-color: transparent;
     border-radius: 5px;
     font-size: 1.5rem;
-    margin-top: 2rem;
+    margin: 3rem .5rem 0 .5rem;
     cursor: pointer;
 }
 
 /* Remove link decoration */
 .gsap_hero a {
     text-decoration: none;
+}
+
+/********************************************/
+/* Register, Login*/
+/********************************************/
+
+/* Style and set up form */
+.register form, .login form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10%;
+    font-family: var(--font-text);
+    font-weight: 600;
+    font-size: 1.5rem;
+    font-style: italic;
+}
+
+/* Style input */
+.register label, .login label {
+    margin: 20px 0 5px 0;
+    font-size: 1.3rem;
+}
+
+.register input, .login input {
+    width: 20%;
+    height: 2.3rem;
+    background: rgba(255, 255, 255, 0.319);
+    border: none;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.register button, .login button {
+    width: 15%;
+    height: 3rem;
+    border: 2px solid #000;
+    background-color: transparent;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    margin-top: 3rem;
+    cursor: pointer;
+}
+
+.register input:focus {
+    outline: none;
+}
+
+
+/********************************************/
+/* Console */
+/********************************************/
+.console header ul {
+    display: inline-flex;
+    list-style: none;
+    margin: .5em 0 0 1em;
+    font-size: 1.3em;
+}
+
+.console header ul li{
+    margin: 1em;
+    cursor: pointer;
+}
+
+.logout_btn {
+    position: absolute;
+    right: 2em;
+    top: 2em;
+}
+
+.logout_btn a {
+    text-decoration: none;
+    color: #000;
+}
+
+.console .colors {
+    margin: auto;
+    padding-top: 3em;
+    max-width: 90%;
 }
 
 /* Media Query */

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Console
+{% endblock %}
+
+{% block content %}
+<!-- Log out button -->
+<div class="wrapper console">
+    <header>
+        <ul>
+            <li><a href="/logout">Home</a></li>
+            <li><a href="/mycolors">My Colors</a></li>
+            <li><a href="/scan">Scan Image</a></li>
+            <li><div class="logout_btn">
+                <a href="/logout">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </header>
+    <div class="colors">
+        <h1>Pick your colors</h1>
+        <ul>
+            {% for color in colors %}
+                <li style="background-color: {{ color }}"></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
