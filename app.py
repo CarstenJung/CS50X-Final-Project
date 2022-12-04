@@ -3,7 +3,7 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
-# Import API Functions 
+# Import API Functions
 from api import *
 
 # Configure application
@@ -59,7 +59,7 @@ def register():
                 return render_template("sorry.html", message="Username already exists")
             else:
                 db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)", username=request.form.get("username"), hash=generate_password_hash(request.form.get("password")))
-                
+
                 return render_template("login.html")
     return render_template("register.html")
 
@@ -78,9 +78,9 @@ def login():
                 return render_template("sorry.html", message="Invalid username and/or password")
             else:
                 session["user_id"] = rows[0]["id"]
-                return redirect("console.html")
-    
-    
+                return render_template("console.html")
+
+
     return render_template("login.html")
 
 
@@ -89,7 +89,7 @@ def login():
 @login_required
 def console():
     """Show console"""
-    
+
     return render_template("console.html")
 
 
@@ -98,7 +98,7 @@ def console():
 def logout():
     # Forget any user_id
     session.clear()
-    
+
     return redirect("/")
 
 
@@ -106,12 +106,18 @@ def logout():
 @app.route("/mycolors", methods=["GET", "POST"])
 def mycolors():
     # Add color to user's list
-    
+
     return render_template("mycolors.html")
 
 # Scan Image
 @app.route("/scan", methods=["GET", "POST"])
 def scan():
     # Add color to user's list
-    
-    return render_template("scan.html")
+    image = db.execute("INSERT INTO images (image) VALUES (:image)", image=request.files["image"])
+
+    if not image:
+        return render_template("sorry.html", message="Please enter an image URL")
+    else:
+        flash(f"Image scanned!")
+        """ colors = scan_image(image) """
+        return render_template("scan.html")

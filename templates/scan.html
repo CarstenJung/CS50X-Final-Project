@@ -5,5 +5,25 @@
 {% endblock %}
 
 {% block content %}
-
+    <div class="wrapper scan">
+        <header>
+            <ul>
+                <li><a href="/logout">Home</a></li>
+                <li><a href="/mycolors">My Colors</a></li>
+                <li><a href="/scan">Scan Image</a></li>
+                <li><div class="logout_btn">
+                    <a href="/logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </header>
+        <div class="scan">
+            <h1>Scan Image</h1>
+            <form action="/scan" method="post" enctype="multipart/form-data">
+                <input type="file" name="image" id="image">
+                <input type="submit" value="Upload Image" name="submit">
+            </form>
+        </div>
+        {{ colors }}
+    </div>
 {% endblock %}
