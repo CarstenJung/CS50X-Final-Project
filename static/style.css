@@ -117,22 +117,27 @@
 /********************************************/
 /* Console */
 /********************************************/
-.console header ul {
+.console header ul, .scan header ul {
     display: inline-flex;
     list-style: none;
     margin: .5em 0 0 1em;
     font-size: 1.3em;
 }
 
-.console header ul li{
+.console header ul li, .scan header ul li {
     margin: 1em;
     cursor: pointer;
+}
+
+.console header ul li a, .scan header ul li a {
+    text-decoration: none;
+    color: #000;
 }
 
 .logout_btn {
     position: absolute;
     right: 2em;
-    top: 2em;
+    top: 1.5em;
 }
 
 .logout_btn a {
@@ -144,6 +149,23 @@
     margin: auto;
     padding-top: 3em;
     max-width: 90%;
+}
+
+
+/********************************************/
+/* Color Tabs */
+/********************************************/
+.colors ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin-top: 2em;
+}
+.colors ul li {
+    margin: 1em;
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
 }
 
 /* Media Query */
