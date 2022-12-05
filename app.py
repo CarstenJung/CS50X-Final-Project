@@ -2,12 +2,24 @@ from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
+# Import os for file upload
+import os
 
-# Import API Functions
-from api import *
+import  http.client
+
+# Import Helper Functions
+from helper import login_required, scan_image
+from colors import colors_API
+
+# Set up Rest API
+from flask_cors import CORS 
+
 
 # Configure application
 app = Flask(__name__)
+# enable resource sharing between frontend and server
+CORS(app)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -15,6 +27,10 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+
+# Set up File Uploads
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+""" app.config['MAX_CONTENT_PATH'] = 1024 * 1024 """
 
 Session(app)
 
@@ -78,7 +94,10 @@ def login():
                 return render_template("sorry.html", message="Invalid username and/or password")
             else:
                 session["user_id"] = rows[0]["id"]
-                return render_template("console.html")
+                
+
+                colors = colors_API()
+                return render_template("console.html", colors = colors)
 
 
     return render_template("login.html")
@@ -90,6 +109,7 @@ def login():
 def console():
     """Show console"""
 
+    
     return render_template("console.html")
 
 
@@ -104,6 +124,7 @@ def logout():
 
 # My Colors
 @app.route("/mycolors", methods=["GET", "POST"])
+@login_required
 def mycolors():
     # Add color to user's list
 
@@ -111,13 +132,24 @@ def mycolors():
 
 # Scan Image
 @app.route("/scan", methods=["GET", "POST"])
+@login_required
 def scan():
-    # Add color to user's list
-    image = db.execute("INSERT INTO images (image) VALUES (:image)", image=request.files["image"])
+    # Add color to user's list 
+    return render_template("scan.html")
 
-    if not image:
-        return render_template("sorry.html", message="Please enter an image URL")
+@app.route('/scanned', methods = ['GET', 'POST'])
+@login_required
+def upload_file():
+    if request.method == 'POST':
+        # Get image
+        f = request.files['image']
+        # Save image
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
+        
+        with open('static/uploads/' + f.filename, 'rb') as image:
+            color = scan_image(image)  
+      
+        return render_template("scanned.html", color=color)
     else:
-        flash(f"Image scanned!")
-        """ colors = scan_image(image) """
-        return render_template("scan.html")
+        return render_template("sorry.html", message="Please upload an image")
+  
