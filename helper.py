@@ -4,6 +4,9 @@ from flask import g, request, redirect, url_for
 from flask import session
 from PIL import Image
 
+import requests
+from requests.structures import CaseInsensitiveDict
+
 
 # Decorate routes to require login
 def login_required(f):
@@ -32,8 +35,8 @@ def scan_image(image):
 
 
 # Color API
-def load_more(result):
-     # ENDPOINT:
+def load_more():
+        # ENDPOINT:
     url = "http://colormind.io/api/"
     # Request Format
     headers = CaseInsensitiveDict()

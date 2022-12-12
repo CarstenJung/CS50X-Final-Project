@@ -197,6 +197,7 @@
     border-radius: 10px;
     width: 200px;
     height: 200px;
+    box-shadow: 10px 10px 8px 0px rgb(0 0 0 / 30%);
 }
 
 /* Media Query */

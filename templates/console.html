@@ -25,7 +25,10 @@
                 <li style="background-color: rgb{{ color }};"></li>
             {% endfor %}
         </ul>
-        <input type="button" value="Load new palette" name="refresh" id="refresh">
+        <form action="/console" method="post">
+            <input type="submit" value="Load new palette" name="refresh" id="refresh">
+            <input type="submit" value="Save palette" name="save" id="save">
+        </form>
     </div>
 </div>
 {% endblock %}

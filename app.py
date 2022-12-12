@@ -9,10 +9,7 @@ import os
 
 # Import Helper Functions
 from helper import login_required, scan_image, load_more
-""" from colors import colors_API """
 
-import requests
-from requests.structures import CaseInsensitiveDict
 # Configure application
 app = Flask(__name__)
 
@@ -90,18 +87,8 @@ def login():
             else:
                 session["user_id"] = rows[0]["id"]
 
-                # ENDPOINT:
-                url = "http://colormind.io/api/"
-                # Request Format
-                headers = CaseInsensitiveDict()
-                headers["Content-Type"] = "application/json"
-                data = '{"model":"default"}'
-
-                # Request:
-                resp = requests.post(url, headers=headers, data=data)
-
-                colors = resp.json().get("result")
-                result = [(colors[0][0], colors[0][1], colors[0][2]), (colors[1][0], colors[1][1], colors[1][2]), (colors[2][0], colors[2][1], colors[2][2]), (colors[3][0], colors[3][1], colors[3][2]), (colors[4][0], colors[4][1], colors[4][2])]
+                # Load Colors From API
+                result = load_more();
 
                 return render_template("console.html", colors = result)
 
@@ -114,18 +101,18 @@ def login():
 @login_required
 def console():
     """Show console"""
-    # ENDPOINT:
-    url = "http://colormind.io/api/"
-    # Request Format
-    headers = CaseInsensitiveDict()
-    headers["Content-Type"] = "application/json"
-    data = '{"model":"default"}'
+    # Load Colors From API
+    result = load_more();
 
-    # Request:
-    resp = requests.post(url, headers=headers, data=data)
+    # Reload API when button is clicked
+    if request.method == "POST":
+        if 'refresh' in request.form:
+            result = load_more();
+            return render_template("console.html", colors = result)
 
-    colors = resp.json().get("result")
-    result = [(colors[0][0], colors[0][1], colors[0][2]), (colors[1][0], colors[1][1], colors[1][2]), (colors[2][0], colors[2][1], colors[2][2]), (colors[3][0], colors[3][1], colors[3][2]), (colors[4][0], colors[4][1], colors[4][2])]
+        if 'save' in request.form:
+            db.execute("INSERT INTO colors (id, color) VALUES (?, ?)", session["user_id"], result)
+            return render_template("mycolors.html", colors = result)
 
     return render_template("console.html", colors = result)
 
