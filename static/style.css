@@ -98,7 +98,7 @@
     font-size: 1rem;
 }
 
-.register button, .login button {
+.register button, .login button, .console #refresh {
     width: 15%;
     height: 3rem;
     border: 2px solid #000;
@@ -117,8 +117,8 @@
 /********************************************/
 /* Console */
 /********************************************/
-.console header ul, 
-.scan header ul, 
+.console header ul,
+.scan header ul,
 .scanned header ul {
     display: inline-flex;
     list-style: none;
@@ -126,15 +126,15 @@
     font-size: 1.3em;
 }
 
-.console header ul li, 
-.scan header ul li, 
+.console header ul li,
+.scan header ul li,
 .scanned header ul li {
     margin: 1em;
     cursor: pointer;
 }
 
-.console header ul li a, 
-.scan header ul li a, 
+.console header ul li a,
+.scan header ul li a,
 .scanned header ul li a {
     text-decoration: none;
     color: #000;
@@ -151,10 +151,35 @@
     color: #000;
 }
 
-.console .colors, .scanned .scan_result, .scan .scan_input { 
+.console .colors, .scanned .scan_result, .scan .scan_input {
     margin: auto;
     padding-top: 3em;
     max-width: 90%;
+}
+
+/********************************************/
+/* Scan*/
+/********************************************/
+.scan input[type="file"] {
+    display: none;
+}
+
+.scan .scan_label p {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-weight: 800;
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.319);
+    border: none;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    text-align: center;
+    font-size: 1rem;
+    margin-right: 3rem;
+}
+
+.scan_input form {
+    margin-top: 3rem;
 }
 
 

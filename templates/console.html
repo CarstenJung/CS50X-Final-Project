@@ -22,12 +22,10 @@
         <h1>Pick your colors</h1>
         <ul>
             {% for color in colors %}
-            <li>
-                {{ color }}
-                <!-- <div class="color" style="background-color: rgb{{ color }}"></div> -->
-            </li>
+                <li style="background-color: rgb{{ color }};"></li>
             {% endfor %}
         </ul>
+        <input type="button" value="Load new palette" name="refresh" id="refresh">
     </div>
 </div>
 {% endblock %}

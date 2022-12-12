@@ -20,7 +20,10 @@
         <div class="scan_input">
             <h1>Scan Image</h1>
             <form enctype = "multipart/form-data" action="/scanned" method="post" enctype="multipart/form-data">
-                <input type="file" name="image" id="image">
+                <label for="image" class="scan_label">
+                    <input type="file" name="image" id="image">
+                    <p>Select File</p>
+                </label>
                 <input type="submit" value="Upload Image" name="submit">
             </form>
         </div>

@@ -6,20 +6,15 @@ from werkzeug.utils import secure_filename
 # Import os for file upload
 import os
 
-import  http.client
 
 # Import Helper Functions
-from helper import login_required, scan_image
-from colors import colors_API
+from helper import login_required, scan_image, load_more
+""" from colors import colors_API """
 
-# Set up Rest API
-from flask_cors import CORS 
-
-
+import requests
+from requests.structures import CaseInsensitiveDict
 # Configure application
 app = Flask(__name__)
-# enable resource sharing between frontend and server
-CORS(app)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -94,10 +89,21 @@ def login():
                 return render_template("sorry.html", message="Invalid username and/or password")
             else:
                 session["user_id"] = rows[0]["id"]
-                
 
-                colors = colors_API()
-                return render_template("console.html", colors = colors)
+                # ENDPOINT:
+                url = "http://colormind.io/api/"
+                # Request Format
+                headers = CaseInsensitiveDict()
+                headers["Content-Type"] = "application/json"
+                data = '{"model":"default"}'
+
+                # Request:
+                resp = requests.post(url, headers=headers, data=data)
+
+                colors = resp.json().get("result")
+                result = [(colors[0][0], colors[0][1], colors[0][2]), (colors[1][0], colors[1][1], colors[1][2]), (colors[2][0], colors[2][1], colors[2][2]), (colors[3][0], colors[3][1], colors[3][2]), (colors[4][0], colors[4][1], colors[4][2])]
+
+                return render_template("console.html", colors = result)
 
 
     return render_template("login.html")
@@ -108,9 +114,20 @@ def login():
 @login_required
 def console():
     """Show console"""
+    # ENDPOINT:
+    url = "http://colormind.io/api/"
+    # Request Format
+    headers = CaseInsensitiveDict()
+    headers["Content-Type"] = "application/json"
+    data = '{"model":"default"}'
 
-    
-    return render_template("console.html")
+    # Request:
+    resp = requests.post(url, headers=headers, data=data)
+
+    colors = resp.json().get("result")
+    result = [(colors[0][0], colors[0][1], colors[0][2]), (colors[1][0], colors[1][1], colors[1][2]), (colors[2][0], colors[2][1], colors[2][2]), (colors[3][0], colors[3][1], colors[3][2]), (colors[4][0], colors[4][1], colors[4][2])]
+
+    return render_template("console.html", colors = result)
 
 
 # Logout
@@ -134,7 +151,7 @@ def mycolors():
 @app.route("/scan", methods=["GET", "POST"])
 @login_required
 def scan():
-    # Add color to user's list 
+    # Add color to user's list
     return render_template("scan.html")
 
 @app.route('/scanned', methods = ['GET', 'POST'])
@@ -145,11 +162,11 @@ def upload_file():
         f = request.files['image']
         # Save image
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
-        
+
         with open('static/uploads/' + f.filename, 'rb') as image:
-            color = scan_image(image)  
-      
+            color = scan_image(image)
+
         return render_template("scanned.html", color=color)
     else:
         return render_template("sorry.html", message="Please upload an image")
-  
+
