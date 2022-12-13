@@ -10,7 +10,7 @@
         <h1>Color Schemes</h1>
         <ul>
             {% for color in colors %}
-            <li>{{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }}</li>
+            <li style="background: rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})"></li>
             {% endfor %}
         </ul>
     </div>

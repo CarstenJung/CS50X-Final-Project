@@ -9,6 +9,9 @@ import os
 # Import Helper Functions
 from helper import login_required, scan_image, load_more
 
+# Import for print function
+import sys
+
 # Configure application
 app = Flask(__name__)
 
@@ -112,8 +115,10 @@ def console():
         if 'save' in request.form:
             for color in result:
                 db.execute("INSERT INTO colors (r, g, b, session) VALUES (?, ?, ?, ?)", color[0], color[1], color[2], session["user_id"])
+                
+                flash("Color saved!")
             
-            return render_template("mycolors.html", colors = result)
+            #return render_template("mycolors.html", colors = result)
 
     return render_template("console.html", colors = result)
 
@@ -135,9 +140,7 @@ def mycolors():
     if session["user_id"]:
         color_db = db.execute("SELECT * FROM colors WHERE session=?", session["user_id"])
         
-        template =("{% for value in colors_db %} {{ r }}, {{ g }}, {{ b }} {% endfor %}")
-        
-        return render_template("mycolors.html", colors = color_db, template=template)
+        return render_template("mycolors.html", colors=color_db)
     else:
         return render_template("sorry.html", message="Please log in to view your colors")
 

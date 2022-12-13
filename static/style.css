@@ -189,13 +189,15 @@ header ul li a {
 /********************************************/
 /* Color Tabs */
 /********************************************/
-.colors ul {
+.colors ul,
+.color_schemes ul  {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
     margin-top: 2em;
 }
-.colors ul li {
+.colors ul li, 
+.color_schemes ul li {
     margin: 1em;
     border-radius: 10px;
     width: 200px;
