@@ -111,7 +111,9 @@ def console():
             return render_template("console.html", colors = result)
 
         if 'save' in request.form:
-            db.execute("INSERT INTO colors (id, color) VALUES (?, ?)", session["user_id"], result)
+            for color in result:
+                db.execute("INSERT INTO colors (id, color) VALUES (:id, :color)", id=session["user_id"], color=color[0:1:2])
+            
             return render_template("mycolors.html", colors = result)
 
     return render_template("console.html", colors = result)
@@ -131,8 +133,10 @@ def logout():
 @login_required
 def mycolors():
     # Add color to user's list
-
-    return render_template("mycolors.html")
+    if session["user_id"]:
+        return render_template("mycolors.html")
+    else:
+        return render_template("sorry.html", message="Please log in to view your colors")
 
 # Scan Image
 @app.route("/scan", methods=["GET", "POST"])

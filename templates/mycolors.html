@@ -5,5 +5,10 @@
 {% endblock %}
 
 {% block content %}
-
+    <h1>My Colors</h1>
+    <ul>
+        {% for color in colors %}
+            <li>{{ color }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

@@ -98,7 +98,7 @@
     font-size: 1rem;
 }
 
-.register button, .login button, .console #refresh {
+.register button, .login button, .console #refresh, .console #save, .scanned button {
     width: 15%;
     height: 3rem;
     border: 2px solid #000;
@@ -115,27 +115,26 @@
 
 
 /********************************************/
-/* Console */
+/* Header Menu */
 /********************************************/
-.console header ul,
-.scan header ul,
-.scanned header ul {
+header ul {
+    position: absolute;
+    width: 100vw;
     display: inline-flex;
     list-style: none;
     margin: .5em 0 0 1em;
-    font-size: 1.3em;
+    font-size: 1em;
+    font-family: var(--font-text);
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
-.console header ul li,
-.scan header ul li,
-.scanned header ul li {
+header ul li {
     margin: 1em;
     cursor: pointer;
 }
 
-.console header ul li a,
-.scan header ul li a,
-.scanned header ul li a {
+header ul li a {
     text-decoration: none;
     color: #000;
 }
@@ -143,7 +142,7 @@
 .logout_btn {
     position: absolute;
     right: 2em;
-    top: 1.5em;
+    top: 1em;
 }
 
 .logout_btn a {
@@ -151,9 +150,13 @@
     color: #000;
 }
 
+/********************************************/
+/* Console */
+/********************************************/
+
 .console .colors, .scanned .scan_result, .scan .scan_input {
     margin: auto;
-    padding-top: 3em;
+    padding-top: 8em;
     max-width: 90%;
 }
 

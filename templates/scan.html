@@ -6,17 +6,6 @@
 
 {% block content %}
     <div class="wrapper scan">
-        <header>
-            <ul>
-                <li><a href="/console">Home</a></li>
-                <li><a href="/mycolors">My Colors</a></li>
-                <li><a href="/scan">Scan Image</a></li>
-                <li><div class="logout_btn">
-                    <a href="/logout">Logout</a>
-                    </div>
-                </li>
-            </ul>
-        </header>
         <div class="scan_input">
             <h1>Scan Image</h1>
             <form enctype = "multipart/form-data" action="/scanned" method="post" enctype="multipart/form-data">
