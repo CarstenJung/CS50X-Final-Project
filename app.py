@@ -9,8 +9,6 @@ import os
 # Import Helper Functions
 from helper import login_required, scan_image, load_more
 
-# Import for print function
-import sys
 
 # Configure application
 app = Flask(__name__)
@@ -90,7 +88,7 @@ def login():
                 session["user_id"] = rows[0]["id"]
 
                 # Load Colors From API
-                result = load_more();
+                result = load_more()
 
                 return render_template("console.html", colors = result)
 
@@ -104,21 +102,18 @@ def login():
 def console():
     """Show console"""
     # Load Colors From API
-    result = load_more();
+    result = load_more()
+
 
     # Reload API when button is clicked
     if request.method == "POST":
-        if 'refresh' in request.form:
-            result = load_more();
-            return render_template("console.html", colors = result)
+        """ if 'refresh' in request.form:
+            result = load_more()
+            return render_template("console.html", colors = result) """
 
         if 'save' in request.form:
             for color in result:
                 db.execute("INSERT INTO colors (r, g, b, session) VALUES (?, ?, ?, ?)", color[0], color[1], color[2], session["user_id"])
-                
-                flash("Color saved!")
-            
-            #return render_template("mycolors.html", colors = result)
 
     return render_template("console.html", colors = result)
 
