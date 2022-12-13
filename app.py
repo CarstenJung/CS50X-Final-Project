@@ -133,7 +133,11 @@ def logout():
 def mycolors():
     # Add color to user's list
     if session["user_id"]:
-        return render_template("mycolors.html")
+        color_db = db.execute("SELECT * FROM colors WHERE session=?", session["user_id"])
+        
+        template =("{% for value in colors_db %} {{ r }}, {{ g }}, {{ b }} {% endfor %}")
+        
+        return render_template("mycolors.html", colors = color_db, template=template)
     else:
         return render_template("sorry.html", message="Please log in to view your colors")
 

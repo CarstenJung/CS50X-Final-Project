@@ -8,6 +8,11 @@
 <div class="wrapper mycolors">
     <div class="color_schemes">
         <h1>Color Schemes</h1>
+        <ul>
+            {% for color in colors %}
+            <li>{{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }}</li>
+            {% endfor %}
+        </ul>
     </div>
     <div class="img_colors">
         <h1>Image Colors</h1>
