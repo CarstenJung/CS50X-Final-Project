@@ -6,7 +6,6 @@ from werkzeug.utils import secure_filename
 # Import os for file upload
 import os
 
-
 # Import Helper Functions
 from helper import login_required, scan_image, load_more
 
@@ -112,7 +111,7 @@ def console():
 
         if 'save' in request.form:
             for color in result:
-                db.execute("INSERT INTO colors (id, color) VALUES (:id, :color)", id=session["user_id"], color=color[0:1:2])
+                db.execute("INSERT INTO colors (r, g, b, session) VALUES (?, ?, ?, ?)", color[0], color[1], color[2], session["user_id"])
             
             return render_template("mycolors.html", colors = result)
 
