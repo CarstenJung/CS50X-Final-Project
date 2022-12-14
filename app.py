@@ -29,6 +29,9 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///colors.db")
 
+# Empty dictionary to store colors
+colors_dict = {}
+
 # Make sure responses aren't cached
 @app.after_request
 def after_request(response):
@@ -102,14 +105,15 @@ def login():
 def console():
     """Show console"""
     # Load Colors From API
-    result = load_more()
+    colors_dict = load_more()
+    result = colors_dict
 
 
     # Reload API when button is clicked
     if request.method == "POST":
-        """ if 'refresh' in request.form:
+        if 'refresh' in request.form:
             result = load_more()
-            return render_template("console.html", colors = result) """
+            return render_template("console.html", colors = result)
 
         if 'save' in request.form:
             for color in result:

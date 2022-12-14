@@ -27,7 +27,7 @@
     background-size: 400%;
     animation: gradient 20s ease infinite alternate;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* Center and place the content */
@@ -101,8 +101,9 @@
 .register button, .login button, .console #refresh, .console #save, .scanned button {
     width: 15%;
     height: 3rem;
-    border: 2px solid #000;
-    background-color: transparent;
+    /* border: 2px solid #000; */
+    border: none;
+    background-color: rgba(255, 255, 255, 0.337);
     border-radius: 5px;
     font-size: 1.5rem;
     margin-top: 3rem;
@@ -163,6 +164,27 @@ header ul li a {
 /********************************************/
 /* Scan*/
 /********************************************/
+#loaded_img {
+    max-height: 500px;
+    max-width: 500px;
+    margin-top: 3em;
+    opacity: 0;
+}
+
+.scan_input form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+#img_submit {
+    height: 3rem;
+    font-family: var(--font-headline);
+    font-weight: 800;
+    margin-right: 3rem;
+}
+
 .scan input[type="file"] {
     display: none;
 }
@@ -171,7 +193,6 @@ header ul li a {
     display: inline-block;
     padding: 1rem 2rem;
     font-weight: 800;
-    font-style: italic;
     background: rgba(255, 255, 255, 0.319);
     border: none;
     border-radius: 10px;
@@ -184,6 +205,7 @@ header ul li a {
 .scan_input form {
     margin-top: 3rem;
 }
+
 
 
 /********************************************/
