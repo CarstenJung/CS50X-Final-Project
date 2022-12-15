@@ -5,5 +5,12 @@ document.getElementById('image').onchange = function () {
     
     loadedImg.style.opacity = 1;
     loadedImg.src = URL.createObjectURL(this.files[0])
-
   };
+
+/* let saveColors = document.getElementById('saveColor')
+
+function preventLoading(event) {
+  event.preventDefault()
+}
+
+saveColors.addEventListener('click', preventLoading, false) */
