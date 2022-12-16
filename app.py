@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 import os
 
 # Import Helper Functions
-from helper import login_required, scan_image, load_more
+from helper import *
 
 
 # Configure application
@@ -30,6 +30,8 @@ Session(app)
 db = SQL("sqlite:///colors.db")
 
 # Make sure responses aren't cached
+
+
 @app.after_request
 def after_request(response):
     """Disable caching"""
@@ -37,6 +39,7 @@ def after_request(response):
     response.headers["Expires"] = 0
     response.headers["Pragma"] = "no-cache"
     return response
+
 
 # Load DB into variable
 db = SQL("sqlite:///colors.db")
@@ -49,6 +52,8 @@ def index():
     return render_template("index.html")
 
 # Register
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register new user"""
@@ -62,16 +67,20 @@ def register():
         elif request.form.get("password") != request.form.get("confirm"):
             return render_template("sorry.html", message="Passwords do not match")
         else:
-            rows = db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
+            rows = db.execute("SELECT * FROM users WHERE username = :username",
+                              username=request.form.get("username"))
             if len(rows) != 0:
                 return render_template("sorry.html", message="Username already exists")
             else:
-                db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)", username=request.form.get("username"), hash=generate_password_hash(request.form.get("password")))
+                db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)", username=request.form.get(
+                    "username"), hash=generate_password_hash(str(request.form.get("password"))))
 
                 return render_template("login.html")
     return render_template("register.html")
 
 # Login
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Login user"""
@@ -81,17 +90,18 @@ def login():
         elif not request.form.get("password"):
             return render_template("sorry.html", message="Please enter a password")
         else:
-            rows = db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
-            if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+            rows = db.execute("SELECT * FROM users WHERE username = :username",
+                              username=request.form.get("username"))
+            if len(rows) != 1 or not check_password_hash(rows[0]["hash"], str(request.form.get("password"))):
                 return render_template("sorry.html", message="Invalid username and/or password")
             else:
                 session["user_id"] = rows[0]["id"]
 
                 # Load Colors From API
+                global result
                 result = load_more()
 
-                return render_template("console.html", colors = result)
-
+                return render_template("console.html", colors=result)
 
     return render_template("login.html")
 
@@ -102,19 +112,24 @@ def login():
 def console():
     """Show console"""
     # Load Colors From API
-    result = load_more()
+    if request.method == "GET":
+        global result
+        result = load_more()
+
+        return render_template("console.html", colors=result)
 
     # Reload API when button is clicked
     if request.method == "POST":
         if 'refresh' in request.form:
             result = load_more()
-            return render_template("console.html", colors = result)
+            return render_template("console.html", colors=result)
 
         if 'save' in request.form:
             for color in result:
-                db.execute("INSERT INTO colors (r, g, b, session) VALUES (?, ?, ?, ?)", color[0], color[1], color[2], session["user_id"])
+                db.execute("INSERT INTO colors (r, g, b, session) VALUES (?, ?, ?, ?)",
+                           color[0], color[1], color[2], session["user_id"])
 
-    return render_template("console.html", colors = result)
+    return render_template("console.html", colors=result)
 
 
 # Logout
@@ -132,27 +147,32 @@ def logout():
 def mycolors():
     # Add color to user's list
     if session["user_id"]:
-        color_db = db.execute("SELECT * FROM colors WHERE session=?", session["user_id"])
-        
+        color_db = db.execute(
+            "SELECT * FROM colors WHERE session=?", session["user_id"])
+
         return render_template("mycolors.html", colors=color_db)
     else:
         return render_template("sorry.html", message="Please log in to view your colors")
 
 # Scan Image
+
+
 @app.route("/scan", methods=["GET", "POST"])
 @login_required
 def scan():
     # Add color to user's list
     return render_template("scan.html")
 
-@app.route('/scanned', methods = ['GET', 'POST'])
+
+@app.route('/scanned', methods=['GET', 'POST'])
 @login_required
 def upload_file():
     if request.method == 'POST':
         # Get image
         f = request.files['image']
         # Save image
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
+        f.save(os.path.join(
+            app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
 
         with open('static/uploads/' + f.filename, 'rb') as image:
             color = scan_image(image)
@@ -161,3 +181,6 @@ def upload_file():
     else:
         return render_template("sorry.html", message="Please upload an image")
 
+
+if __name__ == "__main__":
+    app.run(debug=True)

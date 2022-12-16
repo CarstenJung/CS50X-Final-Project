@@ -1,6 +1,6 @@
 # Helper Functions for Login
 from functools import wraps
-from flask import g, request, redirect, url_for
+from flask import g, request, redirect
 from flask import session
 from PIL import Image
 
