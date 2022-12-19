@@ -9,17 +9,28 @@ if (document.querySelector('.scan')) {
   }
 }
 
+// Copy IMG colors
 // Copy Color RGB from mycolors
 if (document.querySelector('.mycolors')) {
+  // Variable for Scheme and Image colors
   var savedColor = document.querySelectorAll('.saveColor_btn');
+  var saved_img_color = document.querySelectorAll('.saveColor_img');
 
+  // Loop for Scheme colors
   savedColor.forEach((btn) => {
-    btn.addEventListener('click', saveColor)
+    btn.addEventListener('click', () => {
+      const color_rgb = btn.parentElement.querySelector('.mycolors_rgb');
+      navigator.clipboard.writeText(color_rgb.innerText);
+      console.log(color_rgb.innerHTML)
+    })
   });
 
-  function saveColor() {
-    const color_rgb = document.querySelector('.mycolors_rgb');
-    navigator.clipboard.writeText(color_rgb.innerText);
-    console.log(color_rgb.innerHTML)
-  }
+    // Loop for Image colors
+  saved_img_color.forEach((btn_img) => {
+    btn_img.addEventListener('click', () => {
+      const color_img = btn_img.parentElement.querySelector('.mycolors_img');
+      navigator.clipboard.writeText(color_img.innerText);
+      console.log(color_img.innerHTML)
+    })
+  });
 }

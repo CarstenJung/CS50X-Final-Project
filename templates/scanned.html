@@ -15,7 +15,9 @@
                 {% endfor %}
             </ul>
         </div>
-        <button type="submit">Save Colors</button>
+        <form action="/scanned" method="post" enctype="multipart/form-data">
+            <button type="submit" name="img_color_save" id="img_color_save">Save Colors</button>
+        </form>
     </div>
 </div>
 {% endblock %}

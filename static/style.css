@@ -212,14 +212,16 @@ header ul li a {
 /* Color Tabs */
 /********************************************/
 .colors ul,
-.color_schemes ul  {
+.color_schemes ul,
+.img_colors ul  {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
     margin-top: 2em;
 }
 .colors ul li,
-.color_schemes ul li {
+.color_schemes ul li,
+.img_colors ul li {
     flex-basis: 15%;
     margin: 1em;
     border-radius: 10px;
@@ -239,11 +241,12 @@ header ul li a {
     margin: auto;
 }
 
-.mycolors_rgb {
+.mycolors_rgb,
+.mycolors_img {
     display: none;
 }
 
-.color_schemes button {
+.color_schemes button, .img_colors button {
     margin-top: 50%;
 }
 

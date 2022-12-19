@@ -1,22 +1,21 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Scan Image
+Scan Image
 {% endblock %}
 
 {% block content %}
-    <div class="wrapper scan">
-        <div class="scan_input">
-            <h1>Scan Image</h1>
-            <form enctype = "multipart/form-data" action="/scanned" method="post" enctype="multipart/form-data">
-                <label for="image" class="scan_label">
-                    <input type="file" name="image" id="image">
-                    <p>Select File</p>
-                </label>
-                <input type="submit" value="Upload Image" name="submit" id="img_submit">
-            </form>
-            <img src="" alt="Can not display your Image" id="loaded_img">
-        </div>
-        {{ colors }}
-    </div>
+<div class="wrapper scan">
+    <div class="scan_input">
+        <h1>Scan Image</h1>
+        <form enctype="multipart/form-data" action="/scanned" method="post" enctype="multipart/form-data">
+            <label for="image" class="scan_label">
+                <input type="file" name="image" id="image">
+                <p>Select File</p>
+            </label>
+            <input type="submit" value="Upload Image" name="img_submit" id="img_submit">
+        </form>
+    <img src="" alt="Can not display your Image" id="loaded_img">
+</div>
+</div>
 {% endblock %}

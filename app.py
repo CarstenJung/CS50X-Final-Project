@@ -1,5 +1,5 @@
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
@@ -8,6 +8,9 @@ import os
 
 # Import Helper Functions
 from helper import *
+
+# Global Variables
+global_image_colors = ()
 
 
 # Configure application
@@ -149,8 +152,10 @@ def mycolors():
     if session["user_id"]:
         color_db = db.execute(
             "SELECT * FROM colors WHERE session=?", session["user_id"])
+        img_colors = db.execute(
+            "SELECT * FROM img_colors WHERE session=?", session["user_id"])
 
-        return render_template("mycolors.html", colors=color_db)
+        return render_template("mycolors.html", colors=color_db, img_colors=img_colors)
     else:
         return render_template("sorry.html", message="Please log in to view your colors")
 
@@ -168,19 +173,38 @@ def scan():
 @login_required
 def upload_file():
     if request.method == 'POST':
-        # Get image
-        f = request.files['image']
-        # Save image
-        f.save(os.path.join(
-            app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
+        if 'img_submit' in request.form:
+            # Get image
+            f = request.files['image']
+            # Save image
+            f.save(os.path.join(
+                app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
 
-        with open('static/uploads/' + f.filename, 'rb') as image:
-            color = scan_image(image)
+            with open('static/uploads/' + f.filename, 'rb') as image:
+                global global_image_colors
+                global_image_colors = scan_image(image)
 
-        return render_template("scanned.html", color=color)
+            return render_template("scanned.html", color=global_image_colors)
+
+        if 'img_color_save' in request.form:
+            for colors in global_image_colors:
+                db.execute("INSERT INTO img_colors (r, g, b, session) VALUES (?, ?, ?, ?)",
+                           colors[0], colors[1], colors[2], session["user_id"])
+
+            return redirect(url_for("mycolors"))
+
+    return render_template("mycolors.html")
+
+
+# Analyse Colors
+@app.route('/analyse', methods=['GET', 'POST'])
+def analyse():
+    if request.method == 'POST':
+        # Get color
+        color = request.form.get("analyse_color")
+        # Analyse color
+        color = analyse_color(color)
+
+        return render_template("analyse.html", color=color)
     else:
-        return render_template("sorry.html", message="Please upload an image")
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+        return render_template("analyse.html")

@@ -50,3 +50,9 @@ def load_more():
     result = [(colors[0][0], colors[0][1], colors[0][2]), (colors[1][0], colors[1][1], colors[1][2]), (colors[2][0], colors[2][1], colors[2][2]), (colors[3][0], colors[3][1], colors[3][2]), (colors[4][0], colors[4][1], colors[4][2])]
 
     return result
+
+# Analize Colors
+def analyse_color(color):
+    url = "https://www.thecolorapi.com/id?rgb=" + color
+    return requests.get(url).json()
+

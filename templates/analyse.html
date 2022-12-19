@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Analyse Colors
+{% endblock %}
+
+{% block content %}
+<div class="wrapper analyse">
+    <form action="/analyse" method="POST">
+        <input type="text" value="Copy Color to search" name="analyse_color">
+        {{ color }}
+    </form>
+</div>
+{% endblock %}

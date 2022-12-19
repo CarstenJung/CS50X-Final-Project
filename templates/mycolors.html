@@ -18,6 +18,13 @@ My Colors
     </div>
     <div class="img_colors">
         <h1>Image Colors</h1>
+           <ul>
+            {% for color in img_colors %}
+            <li style="background: rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})"><span
+                    class="mycolors_img">rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})</span><button
+                    class="saveColor_img">Copy Color</button></li>
+            {% endfor %}
+        </ul>
     </div>
 </div>
 {% endblock %}
