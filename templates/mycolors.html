@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    My Colors
+My Colors
 {% endblock %}
 
 {% block content %}
@@ -10,12 +10,14 @@
         <h1>Color Schemes</h1>
         <ul>
             {% for color in colors %}
-            <li style="background: rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})"></li>
+            <li style="background: rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})"><span
+                    class="mycolors_rgb">rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})</span><button
+                    class="saveColor_btn">Copy Color</button></li>
             {% endfor %}
         </ul>
     </div>
     <div class="img_colors">
         <h1>Image Colors</h1>
     </div>
-</div>   
+</div>
 {% endblock %}
