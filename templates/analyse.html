@@ -6,9 +6,23 @@ Analyse Colors
 
 {% block content %}
 <div class="wrapper analyse">
-    <form action="/analyse" method="POST">
-        <input type="text" value="Copy Color to search" name="analyse_color">
-        {{ color }}
-    </form>
+    <div class="analyse_container">
+        <div class="analyse_input">
+            <form action="/analyse" method="POST">
+                <input type="text" placeholder="Copy Color to search" name="analyse_color">
+            </form>
+        </div>
+        {% if color %}
+        <div class="analyse_output">
+            <div class="analyse_output_color" style="background-color: {{ color["rgb"]["value"] }};"></div>
+            <div class="analyse_output_text">
+                <p><span class="analyse_color_data">Color Name:</span> {{ color["name"]["value"] }}</p>
+                <p><span class="analyse_color_data">RGB Value:</span> {{ color["rgb"]["value"] }}</p>
+                <p><span class="analyse_color_data">HSL Value:</span> {{ color["hsl"]["value"] }}</p>
+                <p><span class="analyse_color_data">HEX Value:</span> {{ color["name"]["closest_named_hex"] }}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

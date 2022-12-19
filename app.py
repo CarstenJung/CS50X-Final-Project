@@ -199,6 +199,9 @@ def upload_file():
 # Analyse Colors
 @app.route('/analyse', methods=['GET', 'POST'])
 def analyse():
+    if request.method == 'GET':
+        return render_template("analyse.html")
+
     if request.method == 'POST':
         # Get color
         color = request.form.get("analyse_color")
@@ -206,5 +209,3 @@ def analyse():
         color = analyse_color(color)
 
         return render_template("analyse.html", color=color)
-    else:
-        return render_template("analyse.html")
