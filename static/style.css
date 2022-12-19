@@ -1,5 +1,5 @@
 :root {
-    --gradient: radial-gradient(circle, rgba(0,212,208,0.5116640406162465) 0%, rgba(235,108,8,0.5312718837535014) 48%);
+    --gradient: radial-gradient(circle, rgba(0, 212, 208, 0.5116640406162465) 0%, rgba(235, 108, 8, 0.5312718837535014) 48%);
     --font-headline: 'Anybody', cursive;
     --font-text: 'Roboto', sans-serif;
 }
@@ -10,10 +10,15 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 @keyframes gradient {
     0% {
         background-position: 0%;
     }
+
     100% {
         background-position: 100%;
     }
@@ -22,7 +27,7 @@
 /* Index */
 .wrapper {
     font-family: var(--font-headline);
-    background: rgb(0,212,208);
+    background: rgb(0, 212, 208);
     background: var(--gradient);
     background-size: 400%;
     animation: gradient 20s ease infinite alternate;
@@ -33,7 +38,7 @@
 /* Center and place the content */
 .hero {
     text-align: center;
-    padding-top: 10%;
+    padding-top: 15%;
 }
 
 /* Sytle hero */
@@ -47,18 +52,6 @@
     margin-top: -20px;
 }
 
-/* Style buttons */
-.hero button {
-    width: 20%;
-    height: 3rem;
-    border: 2px solid #000;
-    background-color: transparent;
-    border-radius: 5px;
-    font-size: 1.5rem;
-    margin: 3rem .5rem 0 .5rem;
-    cursor: pointer;
-}
-
 /* Remove link decoration */
 .gsap_hero a {
     text-decoration: none;
@@ -68,8 +61,24 @@
 /* Register, Login*/
 /********************************************/
 
+.back_btn {
+    position: absolute;
+    right: 4em;
+    top: 3em;
+    text-decoration: none;
+    font-family: var(--font-text);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.back_btn a {
+    color: rgba(51, 51, 51, 0.98);
+    text-decoration: none;
+}
+
 /* Style and set up form */
-.register form, .login form {
+.register form,
+.login form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,12 +91,15 @@
 }
 
 /* Style input */
-.register label, .login label {
+.register label,
+.login label {
     margin: 20px 0 5px 0;
     font-size: 1.3rem;
 }
 
-.register input, .login input, .scan input {
+.register input,
+.login input,
+.scan input {
     width: 20%;
     height: 2.3rem;
     background: rgba(255, 255, 255, 0.319);
@@ -98,16 +110,44 @@
     font-size: 1rem;
 }
 
-.register button, .login button, .console #refresh, .console #save, .scanned button {
+.hero button,
+#refresh {
+    margin: .5em;
+}
+
+.color_schemes .saveColor_btn,
+.img_colors .saveColor_img {
+    background-color: rgba(255, 255, 255, 0.695);
+    border: none;
+    padding: .5rem 1rem;
+    font-family: var(--font-text);
+    font-weight: 600;
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    text-transform: uppercase;
+    font-size: .8rem;
+    cursor: pointer;
+}
+
+.register button,
+.login button,
+.console #refresh,
+.console #save,
+.scanned button,
+.hero button {
     width: 15%;
     height: 3rem;
-    /* border: 2px solid #000; */
     border: none;
     background-color: rgba(255, 255, 255, 0.337);
     border-radius: 5px;
-    font-size: 1.5rem;
+    font-family: var(--font-text);
+    font-size: 1.1rem;
+    font-weight: 600;
     margin-top: 3rem;
     cursor: pointer;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    color: #222;
+    text-transform: uppercase;
 }
 
 .register input:focus {
@@ -126,8 +166,7 @@ header ul {
     margin: .5em 0 0 1em;
     font-size: 1em;
     font-family: var(--font-text);
-    font-weight: 600;
-    text-transform: uppercase;
+    font-weight: 500;
 }
 
 header ul li {
@@ -142,7 +181,7 @@ header ul li a {
 
 .logout_btn {
     position: absolute;
-    right: 2em;
+    right: 4em;
     top: 1em;
 }
 
@@ -155,9 +194,11 @@ header ul li a {
 /* Console */
 /********************************************/
 
-.console .colors, .scanned .scan_result, .scan .scan_input {
+.console .colors,
+.scanned .scan_result,
+.scan .scan_input {
     margin: auto;
-    padding-top: 8em;
+    padding-top: 8rem;
     max-width: 90%;
 }
 
@@ -213,12 +254,13 @@ header ul li a {
 /********************************************/
 .colors ul,
 .color_schemes ul,
-.img_colors ul  {
+.img_colors ul {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
     margin-top: 2em;
 }
+
 .colors ul li,
 .color_schemes ul li,
 .img_colors ul li {
@@ -236,7 +278,7 @@ header ul li a {
 /********************************************/
 .mycolors .color_schemes,
 .mycolors .img_colors {
-    padding-top: 8em;
+    padding-top: 10rem;
     max-width: 90%;
     margin: auto;
 }
@@ -246,8 +288,33 @@ header ul li a {
     display: none;
 }
 
-.color_schemes button, .img_colors button {
+.color_schemes button,
+.img_colors button {
     margin-top: 50%;
+}
+
+.mycolors .nav_btn {
+    position: fixed;
+    display: flex;
+    gap: .5rem;
+    flex-direction: column;
+    right: 0;
+    top: 100px;
+}
+
+.mycolors .nav_btn a {
+    background: rgba(255, 255, 255, 0.319);
+    text-decoration: none;
+    color: #000;
+    font-family: var(--font-text);
+    font-weight: 600;
+    font-size: .8rem;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px 0 0 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+    padding: .7rem 1.3rem;
 }
 
 /********************************************/
@@ -270,20 +337,21 @@ header ul li a {
 }
 
 .analyse_input input[type=text] {
+    position: relative;
     display: inline-block;
     width: 100%;
     height: 2.3rem;
     background: transparent;
     border: none;
-    border-bottom: 3px solid #000;
-    border-radius: 3px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.532);
 }
 
 .analyse_input input::placeholder {
     font-family: var(--font-text);
     font-weight: 600;
     font-size: 1.3rem;
-    color: #000;
+    color: rgba(0, 0, 0, 0.86);
+    text-align: center;
 }
 
 .analyse_output_color {
@@ -315,6 +383,7 @@ header ul li a {
         font-size: 7rem;
         margin: 15% 0 5% 0;
     }
+
     .hero button {
         width: 50%;
     }

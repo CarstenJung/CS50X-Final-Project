@@ -25,12 +25,42 @@ if (document.querySelector('.mycolors')) {
     })
   });
 
-    // Loop for Image colors
+  // Loop for Image colors
   saved_img_color.forEach((btn_img) => {
     btn_img.addEventListener('click', () => {
       const color_img = btn_img.parentElement.querySelector('.mycolors_img');
       navigator.clipboard.writeText(color_img.innerText);
       console.log(color_img.innerHTML)
     })
+  });
+}
+
+/**********
+ * GSAP
+ ********** */
+if (document.querySelector('.index')) {
+  let hero_split = new SplitText('.gsap_hero h1', {
+    type: 'words,chars'
+  });
+
+  gsap.fromTo(hero_split.chars, {
+    x: 0,
+    y: 10,
+    autoAlpha: 0,
+  }, {
+    x: 0,
+    y: 0,
+    ease: Elastic.easeOut,
+    duration: 3,
+    stagger: .2,
+    autoAlpha: 1,
+  });
+
+  gsap.fromTo('.gsap_hero h2', {
+    autoAlpha: 0,
+  }, {
+    autoAlpha: 1,
+    duration: 3,
+    delay: 2.5,
   });
 }

@@ -209,3 +209,4 @@ def analyse():
         color = analyse_color(color)
 
         return render_template("analyse.html", color=color)
+    return render_template("analyse.html")

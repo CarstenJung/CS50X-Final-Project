@@ -1,11 +1,14 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Login
+Login
 {% endblock %}
 
 {% block content %}
 <div class="wrapper login">
+    <div class="back_btn">
+        <a href="/"><i class="fa-solid fa-angles-left"></i> Go back</a>
+    </div>
     <form action="/login" method="post">
         <label for="username">Username</label>
         <input type="text" name="username" id="username">

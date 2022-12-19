@@ -1,11 +1,14 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Register
+Register
 {% endblock %}
 
 {% block content %}
 <div class="wrapper register">
+    <div class="back_btn">
+        <a href="/"><i class="fa-solid fa-angles-left"></i> Go back</a>
+    </div>
     <form action="/register" method="post">
         <label for="username">Username</label>
         <input type="text" name="username" id="username">
