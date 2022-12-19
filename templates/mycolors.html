@@ -19,16 +19,16 @@ My Colors
         </ul>
     </header>
     <div class="nav_btn">
-        <a href="#schemes" class="color_nav">Color Schemes</a>
-        <a href="#img_schemes" class="color_nav">Image Colors</a>
+        <a href="#schemes" class="color_nav"><i class="fa-solid fa-palette"></i> Color Schemes</a>
+        <a href="#img_schemes" class="color_nav"><i class="fa-regular fa-image"></i> Image Colors</a>
     </div>
     <div class="color_schemes" id="schemes">
         <h1>Color Schemes</h1>
         <ul>
             {% for color in colors %}
             <li style="background: rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})"><span
-                    class="mycolors_rgb">rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})</span><button
-                    class="saveColor_btn">Copy Color</button></li>
+                    class="mycolors_rgb">rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})</span><a
+                    class="saveColor_btn"><i class="fa-regular fa-copy"></i> Copy</a></li>
             {% endfor %}
         </ul>
     </div>
@@ -37,8 +37,8 @@ My Colors
            <ul>
             {% for color in img_colors %}
             <li style="background: rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})"><span
-                    class="mycolors_img">rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})</span><button
-                    class="saveColor_img">Copy Color</button></li>
+                    class="mycolors_img">rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})</span><a
+                    class="saveColor_img"><i class="fa-regular fa-copy"></i></a></li>
             {% endfor %}
         </ul>
     </div>

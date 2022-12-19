@@ -115,7 +115,7 @@ html {
     margin: .5em;
 }
 
-.color_schemes .saveColor_btn,
+/* .color_schemes .saveColor_btn,
 .img_colors .saveColor_img {
     background-color: rgba(255, 255, 255, 0.695);
     border: none;
@@ -127,7 +127,7 @@ html {
     text-transform: uppercase;
     font-size: .8rem;
     cursor: pointer;
-}
+} */
 
 .register button,
 .login button,
@@ -288,9 +288,20 @@ header ul li a {
     display: none;
 }
 
-.color_schemes button,
-.img_colors button {
+.color_schemes a,
+.img_colors a {
+    display: block;
     margin-top: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #fff;
+    transition: all .3s ease-in-out;
+}
+
+.color_schemes a:hover,
+.img_colors a:hover {
+    color: #222;
+    transition: all .3s ease-in-out;
 }
 
 .mycolors .nav_btn {
@@ -315,6 +326,11 @@ header ul li a {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     cursor: pointer;
     padding: .7rem 1.3rem;
+}
+
+.mycolors .nav_btn i {
+    margin-right: 1em;
+    font-size: 1rem;
 }
 
 /********************************************/
