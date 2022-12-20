@@ -11,9 +11,10 @@ My Colors
             <li><a href="/console">Home</a></li>
             <li><a href="/mycolors">My Colors</a></li>
             <li><a href="/scan">Scan Image</a></li>
-            <li><a href="/analyse">Analyse Colors</a></li>
-            <li><div class="logout_btn">
-                <a href="/logout">Logout</a>
+            <li><a href="/analyse">Analyze Colors</a></li>
+            <li>
+                <div class="logout_btn">
+                    <a href="/logout">Logout</a>
                 </div>
             </li>
         </ul>
@@ -24,6 +25,10 @@ My Colors
     </div>
     <div class="color_schemes" id="schemes">
         <h1>Color Schemes</h1>
+        <h3>Youre saved color Schemes - Click color to copy</h3>
+        <form action="/mycolors" method="post">
+            <input type="submit" value="Delete Color Schemes" name="clear_schemes" id="clear_schemes">
+        </form>
         <ul>
             {% for color in colors %}
             <li style="background: rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})"><span
@@ -34,11 +39,15 @@ My Colors
     </div>
     <div class="img_colors" id="img_schemes">
         <h1>Image Colors</h1>
-           <ul>
+        <h3>Youre saved images color - Click color to copy</h3>
+        <form action="/mycolors" method="post">
+            <input type="submit" value="Delete image colors" name="clear_imgColors" id="clear_imgColors">
+        </form>
+        <ul>
             {% for color in img_colors %}
             <li style="background: rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})"><span
                     class="mycolors_img">rgb({{ color["r"] }}, {{ color["g"] }}, {{ color["b"] }})</span><a
-                    class="saveColor_img"><i class="fa-regular fa-copy"></i></a></li>
+                    class="saveColor_img"><i class="fa-regular fa-copy"></i> Copy</a></li>
             {% endfor %}
         </ul>
     </div>

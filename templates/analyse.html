@@ -11,7 +11,7 @@ Analyse Colors
             <li><a href="/console">Home</a></li>
             <li><a href="/mycolors">My Colors</a></li>
             <li><a href="/scan">Scan Image</a></li>
-            <li><a href="/analyse">Analyse Colors</a></li>
+            <li><a href="/analyse">Analyze Colors</a></li>
             <li><div class="logout_btn">
                 <a href="/logout">Logout</a>
                 </div>
@@ -20,8 +20,11 @@ Analyse Colors
     </header>
     <div class="analyse_container">
         <div class="analyse_input">
+            <h1>Analyse your RGB Colors</h1>
+            <h3>Copy colors from MyColors and paste the RGB Code here</h3>
             <form action="/analyse" method="POST">
-                <input type="text" placeholder="Copy Color to search" name="analyse_color">
+                <input type="text" placeholder="Insert the RGB to search" name="analyse_color">
+                <input type="submit" value="Search Color" name="color_search" id="color_search">
             </form>
         </div>
         {% if color %}

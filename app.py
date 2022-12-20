@@ -149,19 +149,28 @@ def logout():
 @login_required
 def mycolors():
     # Add color to user's list
-    if session["user_id"]:
+    if request.method == "POST":
+        if 'clear_schemes' in request.form:
+            db.execute("DELETE FROM colors WHERE session=?",
+                       session["user_id"])
+
+        if 'clear_imgColors' in request.form:
+            db.execute("DELETE FROM img_colors WHERE session=?",
+                       session["user_id"])
+
+        return redirect(url_for("mycolors"))
+
+    else:
         color_db = db.execute(
             "SELECT * FROM colors WHERE session=?", session["user_id"])
         img_colors = db.execute(
             "SELECT * FROM img_colors WHERE session=?", session["user_id"])
 
         return render_template("mycolors.html", colors=color_db, img_colors=img_colors)
-    else:
-        return render_template("sorry.html", message="Please log in to view your colors")
+    return render_template("mycolors.html")
+
 
 # Scan Image
-
-
 @app.route("/scan", methods=["GET", "POST"])
 @login_required
 def scan():
@@ -203,10 +212,16 @@ def analyse():
         return render_template("analyse.html")
 
     if request.method == 'POST':
-        # Get color
-        color = request.form.get("analyse_color")
-        # Analyse color
-        color = analyse_color(color)
+        if 'color_search' in request.form:
+            # Get color
+            color = request.form.get("analyse_color")
+            # Analyse color
+            color = analyse_color(color)
 
-        return render_template("analyse.html", color=color)
+            return render_template("analyse.html", color=color)
+
     return render_template("analyse.html")
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

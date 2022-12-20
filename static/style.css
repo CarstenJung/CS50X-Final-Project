@@ -2,6 +2,8 @@
     --gradient: radial-gradient(circle, rgba(0, 212, 208, 0.5116640406162465) 0%, rgba(235, 108, 8, 0.5312718837535014) 48%);
     --font-headline: 'Anybody', cursive;
     --font-text: 'Roboto', sans-serif;
+    --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    --button-background: rgba(255, 255, 255, 0.319);
 }
 
 * {
@@ -12,6 +14,12 @@
 
 html {
     scroll-behavior: smooth;
+}
+
+h3 {
+    font-family: var(--font-text);
+    padding-top: .3em;
+    color: #333;
 }
 
 @keyframes gradient {
@@ -102,10 +110,10 @@ html {
 .scan input {
     width: 20%;
     height: 2.3rem;
-    background: rgba(255, 255, 255, 0.319);
+    background: var(--button-background);
     border: none;
     border-radius: 10px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: var(--box-shadow);
     text-align: center;
     font-size: 1rem;
 }
@@ -115,26 +123,14 @@ html {
     margin: .5em;
 }
 
-/* .color_schemes .saveColor_btn,
-.img_colors .saveColor_img {
-    background-color: rgba(255, 255, 255, 0.695);
-    border: none;
-    padding: .5rem 1rem;
-    font-family: var(--font-text);
-    font-weight: 600;
-    border-radius: 5px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    text-transform: uppercase;
-    font-size: .8rem;
-    cursor: pointer;
-} */
-
 .register button,
 .login button,
 .console #refresh,
 .console #save,
 .scanned button,
-.hero button {
+.hero button,
+#clear_schemes,
+#clear_imgColors {
     width: 15%;
     height: 3rem;
     border: none;
@@ -145,9 +141,15 @@ html {
     font-weight: 600;
     margin-top: 3rem;
     cursor: pointer;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: var(--box-shadow);
     color: #222;
     text-transform: uppercase;
+}
+
+#clear_schemes,
+#clear_imgColors {
+    margin-top: 1em;
+    font-size: 1rem;
 }
 
 .register input:focus {
@@ -234,10 +236,10 @@ header ul li a {
     display: inline-block;
     padding: 1rem 2rem;
     font-weight: 800;
-    background: rgba(255, 255, 255, 0.319);
+    background: var(--button-background);
     border: none;
     border-radius: 10px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: var(--box-shadow);
     text-align: center;
     font-size: 1rem;
     margin-right: 3rem;
@@ -304,6 +306,11 @@ header ul li a {
     transition: all .3s ease-in-out;
 }
 
+.color_schemes a:active,
+.img_colors a:active {
+    transform: translateY(8px);
+}
+
 .mycolors .nav_btn {
     position: fixed;
     display: flex;
@@ -313,8 +320,24 @@ header ul li a {
     top: 100px;
 }
 
+.mycolors .nav_btn a:hover {
+    background: rgba(255, 255, 255, 0.565);
+    transition: all .3s ease-in-out;
+}
+
+.mycolors .nav_btn a:active {
+    transform: translateY(8px);
+    transition: all .3s ease-in-out;
+}
+
+.mycolors .nav_btn a:hover i {
+    transform: scale(1.1);
+    transition: all .3s ease-in-out;
+}
+
 .mycolors .nav_btn a {
-    background: rgba(255, 255, 255, 0.319);
+    transition: all .3s ease-in-out;
+    background: var(--button-background);
     text-decoration: none;
     color: #000;
     font-family: var(--font-text);
@@ -323,14 +346,15 @@ header ul li a {
     text-transform: uppercase;
     border: none;
     border-radius: 10px 0 0 10px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: var(--box-shadow);
     cursor: pointer;
     padding: .7rem 1.3rem;
 }
 
-.mycolors .nav_btn i {
+.mycolors .nav_btn i{
     margin-right: 1em;
     font-size: 1rem;
+    transition: all .3s ease-in-out;
 }
 
 /********************************************/
@@ -344,44 +368,50 @@ header ul li a {
 .analyse_input,
 .analyse_output {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     padding-top: 10%;
+}
+
+.analyse_output {
+    flex-direction: row;
+    padding-top: 5%;
 }
 
 .analyse_input form {
     width: 20%;
+    padding-top: 3rem;
 }
 
 .analyse_input input[type=text] {
     position: relative;
     display: inline-block;
     width: 100%;
-    height: 2.3rem;
-    background: transparent;
+    height: 2.4rem;
     border: none;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.532);
+   /*  border-bottom: 2px solid rgba(0, 0, 0, 0.532); */
+    background: var(--button-background);
+    border-radius: 5px;
 }
 
 .analyse_input input::placeholder {
     font-family: var(--font-text);
     font-weight: 600;
-    font-size: 1.3rem;
-    color: rgba(0, 0, 0, 0.86);
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.623);
     text-align: center;
 }
 
-.analyse_output_color {
-    width: 300px;
-    height: 300px;
+.analyse_output_color,
+.analyse_output_text {
+    width: 400px;
+    height: 400px;
     box-shadow: 10px 10px 8px 0px rgb(0 0 0 / 30%);
     margin: .5em;
 }
 
 .analyse_output_text {
-    padding: 3rem;
+    padding: 4rem;
     background-color: rgba(255, 255, 255, 0.337);
-    box-shadow: 10px 10px 8px 0px rgb(0 0 0 / 30%);
-    margin: .5em;
 }
 
 .analyse_output_text p {
@@ -391,6 +421,16 @@ header ul li a {
 .analyse_color_data {
     font-family: var(--font-headline);
     font-weight: 800;
+}
+
+#color_search {
+    background: var(--button-background);
+    border: none;
+    padding: .5rem 1rem;;
+    display: block;
+    margin-top: 2rem;
+    border-radius: 5px;
+    font-weight: 600;
 }
 
 /* Media Query */
