@@ -514,19 +514,92 @@ header ul li a {
 
     .register input,
     .login input,
-    .scan input {
+    .scan input,
+    #clear_schemes,
+    #clear_imgColors{
         width: 70%;
     }
 
-     /************/
-    /* Spacing Top Mobile*/
+    /************/
+    /* Button Styles*/
     /***********/
 
     .global_btn {
         width: 45%;
     }
 
-    .colors ul li, .color_schemes ul li, .img_colors ul li {
+
+    /************/
+    /* Hero Section*/
+    /***********/
+    .colors ul li,
+    .color_schemes ul li,
+    .img_colors ul li {
         flex-basis: auto;
     }
+
+    .colors {
+        padding-bottom: 7rem;
+    }
+
+    /************/
+    /* MyColors*/
+    /***********/
+    .mobile_hide {
+        display: none;
+    }
+
+    .mycolors .nav_btn i {
+        margin-right: .5rem;
+    }
+
+    .mycolors h3 {
+        max-width: 90%;
+    }
+
+    /************/
+    /* ScanImage*/
+    /***********/
+    #loaded_img {
+        max-width: 90%;
+    }
+
+    .scan_result #img_color_save {
+        margin: 0 0 7rem 0;
+    }
+
+    .scan_result .colors{
+        padding-bottom: 3rem;
+    }
+
+    /************/
+    /* ScanImage*/
+    /***********/
+    .analyse_input form {
+        width: 70%;
+    }
+
+    .analyse_output {
+        flex-direction: column-reverse;
+    }
+
+    .analyse_output_color,
+    .analyse_output_text {
+        width: 90%;
+        height: 350px;
+        margin: 1rem;
+    }
+
+    .sorry_container img {
+        max-height: 300px;
+    }
 }
+
+@media  (min-width: 1024px) and (max-width: 1440px) {
+    .analyse_input form,
+    #clear_schemes,
+    #clear_imgColors {
+        width: 40%;
+    }
+}
+
