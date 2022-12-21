@@ -167,7 +167,6 @@ def mycolors():
             "SELECT * FROM img_colors WHERE session=?", session["user_id"])
 
         return render_template("mycolors.html", colors=color_db, img_colors=img_colors)
-    return render_template("mycolors.html")
 
 
 # Scan Image
@@ -195,6 +194,9 @@ def upload_file():
 
             return render_template("scanned.html", color=global_image_colors)
 
+        """ if not f in request.form:
+            return render_template("sorry.html", message="Please select an image") """
+
         if 'img_color_save' in request.form:
             for colors in global_image_colors:
                 db.execute("INSERT INTO img_colors (r, g, b, session) VALUES (?, ?, ?, ?)",
@@ -212,6 +214,9 @@ def analyse():
         return render_template("analyse.html")
 
     if request.method == 'POST':
+        if not request.form.get("analyse_color"):
+            return render_template("sorry.html", message="Please enter a color")
+
         if 'color_search' in request.form:
             # Get color
             color = request.form.get("analyse_color")

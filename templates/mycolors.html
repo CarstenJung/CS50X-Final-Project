@@ -27,7 +27,7 @@ My Colors
         <h1>Color Schemes</h1>
         <h3>Youre saved color Schemes - Click color to copy</h3>
         <form action="/mycolors" method="post">
-            <input type="submit" value="Delete Color Schemes" name="clear_schemes" id="clear_schemes">
+            <input type="submit" value="Delete Color Schemes" name="clear_schemes" id="clear_schemes" class="global_btn">
         </form>
         <ul>
             {% for color in colors %}
@@ -41,7 +41,7 @@ My Colors
         <h1>Image Colors</h1>
         <h3>Youre saved images color - Click color to copy</h3>
         <form action="/mycolors" method="post">
-            <input type="submit" value="Delete image colors" name="clear_imgColors" id="clear_imgColors">
+            <input type="submit" value="Delete image colors" name="clear_imgColors" id="clear_imgColors" class="global_btn">
         </form>
         <ul>
             {% for color in img_colors %}
