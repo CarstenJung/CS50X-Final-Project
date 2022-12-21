@@ -194,9 +194,6 @@ def upload_file():
 
             return render_template("scanned.html", color=global_image_colors)
 
-        """ if not f in request.form:
-            return render_template("sorry.html", message="Please select an image") """
-
         if 'img_color_save' in request.form:
             for colors in global_image_colors:
                 db.execute("INSERT INTO img_colors (r, g, b, session) VALUES (?, ?, ?, ?)",
