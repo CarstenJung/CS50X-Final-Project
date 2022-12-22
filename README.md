@@ -76,7 +76,7 @@ Under (/sorry) there is an error page that displays a message with the correspon
 
 ### 7. Design
 
-The CSS was created just like Java Script without the help of a library
+The CSS was created just like Java Script without the help of a library except hero animation with gsap.
 
 For the animated background, a simple keyframe animation and an oversized gradient background were used. This creates an animation that is not too obtrusive and that fits the topic well.
 
